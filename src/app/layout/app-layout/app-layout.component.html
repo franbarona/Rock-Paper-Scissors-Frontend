@@ -1,0 +1,13 @@
+<div class="min-h-screen">
+  <main class="w-screen h-auto mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col items-center space-y-6">
+    <!-- Logout button -->
+    <button
+      type="button"
+      (click)="logout()"
+      class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors font-semibold cursor-pointer"
+    >
+      Logout
+    </button>
+    <router-outlet></router-outlet>
+  </main>
+</div>
