@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 import { authGuard } from './core/guards/auth-guard';
 import { RegisterComponent } from './pages/register/register.component';
+import { MenuComponent } from './pages/menu/menu.component';
 
 export const routes: Routes = [
   // Login route (no layout, no guard)
@@ -20,6 +21,12 @@ export const routes: Routes = [
     path: '',
     component: AppLayoutComponent,
     canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        component: MenuComponent,
+      },
+    ],
   },
   // Redirect empty path to login
   {

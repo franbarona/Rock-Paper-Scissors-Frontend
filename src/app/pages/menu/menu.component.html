@@ -1,0 +1,25 @@
+<div class="flex flex-col gap-6 max-w-4xl w-full">
+  <!-- Play Button -->
+  <app-menu-card
+    [icon]="'🎲'"
+    [title]="'Play'"
+    [description]="'Start a new game'"
+    [routerLink]="'/game'"
+  ></app-menu-card>
+
+  <!-- Statistics Button -->
+  <app-menu-card
+    [icon]="'📊'"
+    [title]="'Statistics'"
+    [description]="'View your stats'"
+    [routerLink]="'/statistics'"
+  ></app-menu-card>
+
+  <!-- Instructions Button -->
+  <app-menu-card
+    [icon]="'📖'"
+    [title]="'Instructions'"
+    [description]="'Learn how to play'"
+    [routerLink]="'/instructions'"
+  ></app-menu-card>
+</div>
