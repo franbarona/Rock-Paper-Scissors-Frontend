@@ -1,10 +1,11 @@
-<a
+<button
   [routerLink]="routerLink"
-  class="bg-gray-800 hover:bg-gray-900 text-white rounded-lg px-24 py-8 flex flex-col justify-center items-center transition-colors shadow-md space-y-2 cursor-pointer"
+  [disabled]="disabled"
+  class="w-full bg-gray-800 hover:bg-gray-900 text-white rounded-lg px-24 py-8 flex flex-col justify-center items-center transition-colors shadow-md space-y-2 cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
 >
-  <div class="flex justify-center items-center space-x-2">
+  <div class="flex justify-center items-end space-x-2">
     <div class="text-4xl">{{ icon }}</div>
     <h2 class="text-2xl font-bold">{{ title }}</h2>
   </div>
   <p>{{ description }}</p>
-</a>
+</button>

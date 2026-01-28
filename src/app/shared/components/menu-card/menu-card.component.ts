@@ -14,4 +14,5 @@ export class MenuCardComponent {
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() routerLink: string = '';
+  @Input() disabled: boolean = false;
 }

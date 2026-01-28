@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-6 max-w-4xl w-full">
+<div class="w-[95%] h-full mx-auto flex flex-col justify-center gap-6 max-w-3xl">
   <!-- Play Button -->
   <app-menu-card
     [icon]="'🎲'"
@@ -13,6 +13,7 @@
     [title]="'Statistics'"
     [description]="'View your stats'"
     [routerLink]="'/statistics'"
+    [disabled]="true"
   ></app-menu-card>
 
   <!-- Instructions Button -->
@@ -21,5 +22,6 @@
     [title]="'Instructions'"
     [description]="'Learn how to play'"
     [routerLink]="'/instructions'"
+    [disabled]="true"
   ></app-menu-card>
 </div>
