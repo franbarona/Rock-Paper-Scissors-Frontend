@@ -1,0 +1,36 @@
+  <!-- Move Selection Interface -->
+  <div class="bg-red-400 p-4 rounded-lg shadow-md">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Make your choice</h3>
+
+    <div class="w-full grid grid-cols-3 justify-center gap-1 md:gap-6 mx-auto">
+      <!-- Rock Button -->
+      <button
+        (click)="handleClick('ROCK')"
+        [disabled]="isLoading"
+        class="flex flex-col items-center gap-1 px-8 py-2 bg-gray-100 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <img src="svgs/ROCK.svg" alt="" class="h-full max-h-20" />
+        <span class="font-bold text-gray-800">ROCK</span>
+      </button>
+
+      <!-- Paper Button -->
+      <button
+        (click)="handleClick('PAPER')"
+        [disabled]="isLoading"
+        class="flex flex-col items-center gap-1 px-8 py-2 bg-gray-100 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <img src="svgs/PAPER.svg" alt="" class="h-full max-h-20" />
+        <span class="font-bold text-gray-800">PAPER</span>
+      </button>
+
+      <!-- Scissors Button -->
+      <button
+        (click)="handleClick('SCISSORS')"
+        [disabled]="isLoading"
+        class="flex flex-col items-center gap-1 px-8 py-2 bg-gray-100 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <img src="svgs/SCISSORS.svg" alt="" class="h-full max-h-20" />
+        <span class="font-bold text-gray-800">SCISSORS</span>
+      </button>
+    </div>
+  </div>
