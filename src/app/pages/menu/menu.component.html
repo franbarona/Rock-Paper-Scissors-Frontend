@@ -1,27 +1,29 @@
-<div class="w-[95%] h-full mx-auto flex flex-col justify-center gap-6 max-w-3xl">
-  <!-- Play Button -->
-  <app-menu-card
-    [icon]="'🎲'"
-    [title]="'Play'"
-    [description]="'Start a new game'"
-    [routerLink]="'/game'"
-  ></app-menu-card>
+<div class="h-full mx-auto mt-auto flex flex-col gap-6 overflow-hidden relative">
+  <!-- Title -->
+  <app-game-title></app-game-title>
+  <div class="absolute w-[18vw] min-w-30 -rotate-45 opacity-70 -bottom-20 right-0">
+    <img src="svgs/ROCK.svg" alt="Rock" />
+  </div>
+  <div class="absolute w-[18vw] min-w-30 rotate-45 opacity-70 -bottom-20 left-0">
+    <img src="svgs/SCISSORS.svg" alt="Scissors" />
+  </div>
 
-  <!-- Statistics Button -->
-  <app-menu-card
-    [icon]="'📊'"
-    [title]="'Statistics'"
-    [description]="'View your stats'"
-    [routerLink]="'/statistics'"
-    [disabled]="true"
-  ></app-menu-card>
+  <div class="flex flex-col space-y-8 w-2xl max-w-[95%] mx-auto mt-10">
+    <!-- Play Button -->
+    <app-menu-card [title]="'Play'" [routerLink]="'/game'"></app-menu-card>
 
-  <!-- Instructions Button -->
-  <app-menu-card
-    [icon]="'📖'"
-    [title]="'Instructions'"
-    [description]="'Learn how to play'"
-    [routerLink]="'/instructions'"
-    [disabled]="true"
-  ></app-menu-card>
+    <!-- Statistics Button -->
+    <app-menu-card
+      [title]="'Statistics'"
+      [routerLink]="'/statistics'"
+      [disabled]="true"
+    ></app-menu-card>
+
+    <!-- Instructions Button -->
+    <app-menu-card
+      [title]="'Instructions'"
+      [routerLink]="'/instructions'"
+      [disabled]="true"
+    ></app-menu-card>
+  </div>
 </div>

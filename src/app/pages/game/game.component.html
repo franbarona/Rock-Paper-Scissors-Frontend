@@ -1,4 +1,4 @@
-<div class="w-full h-full mx-auto flex flex-col overflow-hidden relative">
+<div class="w-full min-h-full mx-auto flex flex-col relative">
   <!-- Error Message -->
   @if (errorMessage()) {
     <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -12,7 +12,7 @@
   </div>
 
   <!-- Last Game Result -->
-  <div class="max-w-[95%] w-3xl my-auto mx-auto">
+  <div class="w-full my-auto mx-auto">
     <app-last-game-result
       [lastGameResult]="lastGameResult()"
       [isLoading]="isLoading()"

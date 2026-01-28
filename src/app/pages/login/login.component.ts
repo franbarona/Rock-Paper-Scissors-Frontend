@@ -4,11 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { LoginRequest } from '../../shared/models/auth.model';
+import { GameTitleComponent } from "../../shared/components/game-title/game-title.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, GameTitleComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
