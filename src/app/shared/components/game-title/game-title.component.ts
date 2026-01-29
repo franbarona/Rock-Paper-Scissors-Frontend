@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-title',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './game-title.component.html',
   styleUrl: './game-title.component.css',
 })
 export class GameTitleComponent {
+  @Input() size: 'Big' | 'Normal' = 'Normal';
 
 }

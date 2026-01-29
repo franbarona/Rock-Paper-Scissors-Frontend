@@ -1,18 +1,13 @@
 <div class="w-full flex items-center justify-center min-h-full p-4">
-  <div
-    class="border border-white/50 rounded-lg shadow-lg p-8 w-full max-w-md backdrop-blur-sm"
-  >
+  <div class="border border-white/50 rounded-lg shadow-lg p-8 w-full max-w-md backdrop-blur-sm">
     <!-- Title -->
     <app-game-title></app-game-title>
+    <p class="text-center mt-8 mb-2">Register new user</p>
 
     <!-- Error Message -->
-    @if (errorMessage()) {
-      <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-        {{ errorMessage() }}
-      </div>
-    }
+    <app-error-message [message]="errorMessage!"></app-error-message>
 
-    <!-- Login Form -->
+    <!-- Register Form -->
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
       <!-- Username Field -->
       <div>
@@ -86,11 +81,7 @@
       </div>
 
       <!-- Submit Button -->
-      <button
-        type="submit"
-        [disabled]="!isFormValid() || isLoading()"
-        class="w-full mt-6"
-      >
+      <button type="submit" [disabled]="!isFormValid() || isLoading()" class="w-full mt-6">
         @if (!isLoading()) {
           <span>Register</span>
         }

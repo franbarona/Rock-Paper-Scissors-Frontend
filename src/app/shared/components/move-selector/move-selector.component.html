@@ -2,7 +2,7 @@
   <div class="py-4">
     <h3 class="text-xl font-semibold mb-4 text-center">Make your choice</h3>
 
-    <div class="w-full grid grid-cols-3 justify-center gap-2 md:gap-6 mx-auto">
+    <div class="w-full grid grid-cols-3 justify-center gap-2 md:gap-6 mx-auto animate-bounceUp">
       <!-- Rock Button -->
       <button
         (click)="handleClick('ROCK')"
@@ -29,7 +29,7 @@
         [disabled]="isLoading"
         class="flex flex-col items-center gap-1 bg-linear-to-tr from-yellow-600 to-yellow-700 border-white border-2 group"
       >
-        <img src="svgs/SCISSORS.svg" alt="" class="h-full max-h-20 rotate-45" />
+        <img src="svgs/SCISSORS.svg" alt="" class="h-full max-h-20 rotate-45 -scale-x-100" />
         <span class="font-bold text-lg lg:text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] group-hover:scale-105">SCISSORS</span>
       </button>
     </div>

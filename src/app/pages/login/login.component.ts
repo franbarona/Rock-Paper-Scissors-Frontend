@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { LoginRequest } from '../../shared/models/auth.model';
 import { GameTitleComponent } from "../../shared/components/game-title/game-title.component";
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, GameTitleComponent],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, GameTitleComponent, ErrorMessageComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

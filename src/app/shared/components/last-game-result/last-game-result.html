@@ -1,45 +1,44 @@
-  <!-- Last Game Result -->
-  @if (lastGameResult; as game) {
-    <div class="p-4">
-      <h3 class="text-2xl font-bold text-center mb-6">{{ getResultMessage(game.result) }}</h3>
-
-      <div class="flex items-center mb-6">
-        <!-- Player Choice -->
-        <div class="flex-1 flex flex-col items-center ">
-          <p class="mb-2">Your choice</p>
-            @switch (game.playerMove) {
-              @case ('ROCK') {
-                <img src="svgs/ROCK.svg" alt="" class="max-h-20" />
-              }
-              @case ('PAPER') {
-                <img src="svgs/PAPER.svg" alt="" class="max-h-20" />
-              }
-              @case ('SCISSORS') {
-                <img src="svgs/SCISSORS.svg" alt="" class="max-h-20" />
-              }
-            }
-          <p class="font-semibold mt-2">{{ game.playerMove }}</p>
-        </div>
-
-        <!-- VS -->
-        <div class="text-2xl font-bold">VS</div>
-
-        <!-- Computer Choice -->
-        <div class="flex-1 flex flex-col items-center">
-          <p class="mb-2">Computer choice</p>
-            @switch (game.computerMove) {
-              @case ('ROCK') {
-                <img src="svgs/ROCK.svg" alt="" class="max-h-20" />
-              }
-              @case ('PAPER') {
-                <img src="svgs/PAPER.svg" alt="" class="max-h-20" />
-              }
-              @case ('SCISSORS') {
-                <img src="svgs/SCISSORS.svg" alt="" class="max-h-20" />
-              }
-            }
-          <p class="font-semibold mt-2">{{ game.computerMove }}</p>
-        </div>
-      </div>
+<!-- Last Game Result -->
+<div class="p-4">
+  @if (lastGameResult) {
+    <h3
+      class="text-4xl font-black text-center mb-8"
+      [class.text-emerald-600]="lastGameResult.result === 'WIN'"
+      [class.text-rose-600]="lastGameResult.result === 'LOSS'"
+      [class.text-gray-600]="lastGameResult.result === 'DRAW'"
+    >
+      {{ getResultMessage(lastGameResult!.result) }}
+    </h3>
+    <div class="flex gap-[8vw] justify-center items-baseline mb-4 text-center">
+      <span
+        class="font-black mt-2 text-2xl lg:text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+        [class.opacity-50]="lastGameResult.result === 'LOSS'"
+      >
+        {{ lastGameResult.playerMove }}
+      </span>
+      <span class="font-medium">VS</span>
+      <span
+        class="font-black mt-2 text-2xl lg:text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+        [class.opacity-50]="lastGameResult.result === 'WIN'"
+      >
+        {{ lastGameResult.computerMove }}
+      </span>
     </div>
   }
+
+  <div>
+    <!-- Player Choice -->
+    <div [class.opacity-50]="lastGameResult?.result !== 'WIN'" [class.animate-fadeInTo50]="!lastGameResult">
+      <app-move-display [move]="lastGameResult?.playerMove || 'ROCK'" [isAnimating]="isLoading" />
+    </div>
+
+    <!-- Computer Choice -->
+    <div [class.opacity-50]="lastGameResult?.result !== 'LOSS'" [class.animate-fadeInTo50]="!lastGameResult">
+      <app-move-display
+        [move]="lastGameResult?.computerMove || 'ROCK'"
+        [isPlayer]="false"
+        [isAnimating]="isLoading"
+      />
+    </div>
+  </div>
+</div>

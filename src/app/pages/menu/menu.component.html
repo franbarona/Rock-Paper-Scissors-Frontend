@@ -1,14 +1,17 @@
-<div class="h-full mx-auto mt-auto flex flex-col gap-6 overflow-hidden relative">
+<div class="h-full w-full overflow-hidden mt-auto flex flex-col gap-6 relative animate-fadeIn">
   <!-- Title -->
-  <app-game-title></app-game-title>
-  <div class="absolute w-[18vw] min-w-30 -rotate-45 opacity-70 -bottom-20 right-0">
-    <img src="svgs/ROCK.svg" alt="Rock" />
-  </div>
-  <div class="absolute w-[18vw] min-w-30 rotate-45 opacity-70 -bottom-20 left-0">
-    <img src="svgs/SCISSORS.svg" alt="Scissors" />
+  <app-game-title [size]="'Big'"></app-game-title>
+
+  <!-- Decorative hands -->
+  <div class="absolute -rotate-45 opacity-70 bottom-0 left-0">
+    <app-move-display [move]="'SCISSORS'" />
   </div>
 
-  <div class="flex flex-col space-y-8 w-2xl max-w-[95%] mx-auto mt-10">
+  <div class="absolute rotate-45 opacity-70 bottom-0 right-0">
+    <app-move-display [move]="'ROCK'" [isPlayer]="false" />
+  </div>
+
+  <div class="flex flex-col space-y-8 w-xl max-w-[80%] mx-auto my-auto text-center animate-bounceUp">
     <!-- Play Button -->
     <app-menu-card [title]="'Play'" [routerLink]="'/game'"></app-menu-card>
 

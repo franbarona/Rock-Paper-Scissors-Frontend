@@ -5,11 +5,7 @@
     <p class="text-center mt-8 mb-2">Sign in to your account</p>
 
     <!-- Error Message -->
-    @if (errorMessage()) {
-      <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-        {{ errorMessage() }}
-      </div>
-    }
+    <app-error-message [message]="errorMessage"></app-error-message>
 
     <!-- Login Form -->
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">

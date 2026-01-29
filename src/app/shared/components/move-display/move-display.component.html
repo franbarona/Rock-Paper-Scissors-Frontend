@@ -1,0 +1,18 @@
+<div
+  class="flex-1 flex flex-col"
+  [ngClass]="[isPlayer ? 'items-end' : 'items-start']"
+>
+  <div
+    class="w-[20vw] min-h-18 absolute top-1/2 -translate-y-1/2 -z-10 duration-500 transition-all ease-in-out "
+    [ngClass]="[
+      isPlayer ? 'rotate-75 -scale-x-100' : '-rotate-75',
+      isAnimating
+        ? (isPlayer ? '-left-20' : '-right-20') + ' animate-bounce'
+        : isPlayer
+          ? 'left-2'
+          : 'right-2',
+    ]"
+  >
+    <img [src]="'svgs/' + move + '.svg'" [alt]="move" />
+  </div>
+</div>
