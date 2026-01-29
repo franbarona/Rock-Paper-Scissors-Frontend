@@ -19,11 +19,6 @@ export class AuthService {
   public readonly currentUser = this.currentUserSignal.asReadonly();
   public readonly isAuthenticated = computed(() => !!this.getToken());
 
-  // Get current user value
-  public get currentUserValue(): User | null {
-    return this.currentUserSignal();
-  }
-
   // Login request
   login(request: LoginRequest) {
     this.logout();
@@ -43,6 +38,7 @@ export class AuthService {
   // Save token and user after successful login/register
   saveUserData(response: AuthResponse): void {
     localStorage.setItem(this.tokenKey, response.token);
+    console.log('Response:', response);
     const user: User = {
       id: response.id,
       username: response.username,

@@ -36,6 +36,6 @@ export class AppLayoutComponent {
   }
 
   get currentUser() {
-    return this.authService.currentUserValue;
+    return this.authService.currentUser();
   }
 }

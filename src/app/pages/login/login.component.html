@@ -34,6 +34,7 @@
           formControlName="password"
           class="w-full px-4 py-2"
           placeholder="Enter your password"
+          (input)="password?.setValue(password?.value.replace(/\s/g, ''), { emitEvent: false })"
           [attr.data-invalid]="password?.invalid && password?.touched"
         />
         @if (password?.invalid && password?.touched) {
