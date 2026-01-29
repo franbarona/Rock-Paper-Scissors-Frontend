@@ -15,7 +15,7 @@ export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/auth`;
   private readonly tokenKey = 'auth_token';
 
-  private readonly currentUserSignal = signal<User | null>(null);
+  private readonly currentUserSignal = signal<User | null>(this.getUserFromStorage());
   public readonly currentUser = this.currentUserSignal.asReadonly();
   public readonly isAuthenticated = computed(() => !!this.getToken());
 
@@ -61,5 +61,43 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.currentUserSignal.set(null);
+  }
+
+  // Retrieve user from storage (for persistence on page reload)
+  private getUserFromStorage(): User | null {
+    const token = this.getToken();
+    if (token) {
+      return this.decodeUserFromToken(token);
+    }
+    return null;
+  }
+
+  // Decode JWT token to extract user data
+  private decodeUserFromToken(token: string): User | null {
+    try {
+      // JWT format: header.payload.signature
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        return null;
+      }
+
+      // Decode payload (base64)
+      const payload = JSON.parse(atob(parts[1]));
+
+      // Check if token is expired
+      if (payload.exp && payload.exp * 1000 < Date.now()) {
+        return null; // Token expired
+      }
+
+      // Return user from JWT payload
+      return {
+        id: payload.sub || payload.userId,
+        username: payload.username || payload.preferred_username,
+        email: payload.email || payload.sub,
+      };
+    } catch (error) {
+      console.error('Error decoding JWT:', error);
+      return null;
+    }
   }
 }

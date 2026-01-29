@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-app-layout',
@@ -12,16 +14,15 @@ import { AuthService } from '../../core/services/auth.service';
 export class AppLayoutComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  showBackButton = false;
-  currentUser$ = this.authService.currentUser;
+  // Convert router url to signal
+  private readonly routerUrl = toSignal(this.router.events.pipe(map(() => this.router.url)), {
+    initialValue: this.router.url,
+  });
 
-  constructor() {
-    // Show back button on specific routes
-    this.router.events.subscribe(() => {
-      const currentUrl = this.router.url;
-      this.showBackButton = currentUrl !== '/';
-    });
-  }
+  // Now it reacts to changes in the router URL
+  showUsername = computed(() => this.routerUrl() === '/');
+  showBackButton = computed(() => this.routerUrl() !== '/');
+  showLogoutButton = computed(() => this.routerUrl() === '/');
 
   // Logout and redirect to login
   logout(): void {
@@ -32,5 +33,9 @@ export class AppLayoutComponent {
   // Go back to previous page
   goBack(): void {
     this.router.navigate(['/']);
+  }
+
+  get currentUser() {
+    return this.authService.currentUserValue;
   }
 }
