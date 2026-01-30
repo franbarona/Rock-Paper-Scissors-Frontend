@@ -15,10 +15,8 @@
   @if (statistics() && !isLoading()) {
     <div class="space-y-2 animate-bounceUp">
       <!-- User Info & win rate -->
-      <div class="flex justify-between items-end bordered-container glass-bg">
-        <div>
-          <h2 class="font-black capitalize">{{ statistics()!.username }}</h2>
-        </div>
+      <div class="flex justify-around items-end bordered-container glass-bg">
+        <h2 class="font-black capitalize">{{ statistics()!.username }}</h2>
         <!-- Win Rate -->
         <div class="text-end space-y-2">
           <p class="text-(--text-secondary-color) font-bold text-sm">Win Rate</p>

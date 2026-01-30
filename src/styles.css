@@ -139,6 +139,14 @@ button:disabled {
     font-weight: 800;
 }
 
+.page-container {
+    width: 100%;
+    max-width: 90%;
+    height: 100%;
+    margin: auto;
+    padding-bottom: 2rem;
+}
+
 .bordered-container {
     padding: 1rem;
     border: 2px solid var(--border-color);

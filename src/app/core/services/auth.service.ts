@@ -38,7 +38,6 @@ export class AuthService {
   // Save token and user after successful login/register
   saveUserData(response: AuthResponse): void {
     localStorage.setItem(this.tokenKey, response.token);
-    console.log('Response:', response);
     const user: User = {
       id: response.id,
       username: response.username,
