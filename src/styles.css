@@ -2,7 +2,6 @@
 
 :root {
     --bg-color: oklch(12.2% 0.057 254.392);
-    --card-bg-color: oklch(17.6% 0.034 252.894)/40%;
     --text-white-color: oklch(97.6% 0.013 254.392);
     --text-color: oklch(92.727% 0.01395 248.154);
     --text-secondary-color: oklch(70.2% 0.02 254.392);
@@ -11,7 +10,7 @@
     --border-color: oklch(39.2% 0.042 251.392);
     --primary-color: oklch(59.2% 0.249 0.584);
     --secondary-color: oklch(37.3% 0.034 259.733);
-    --error-color: #e96464;
+    --error-color: oklch(70.4% 0.191 22.216);
     --border-radius: 12px;
 }
 
@@ -21,6 +20,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 header {
@@ -60,12 +60,16 @@ h2 {
 
 label {
     color: var(--text-white-color);
+    font-weight: 600;
+    font-size: 0.875rem;
     display: block;
     margin-left: .5rem;
     margin-bottom: .5rem;
 }
 
 input {
+    width: 100%;
+    padding: 0.5rem 1rem;
     color: var(--text-color);
     border-width: 2px !important;
     border-radius: 12px !important;

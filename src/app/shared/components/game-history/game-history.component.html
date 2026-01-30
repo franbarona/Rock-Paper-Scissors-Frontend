@@ -2,40 +2,46 @@
   <!-- Header Statistics -->
   <div class="title-header">
     <h1>History</h1>
-    @if (gameHistory().length > 0) {
-      <p class="text-(--text-secondary-color)">Results of the last {{ gameHistory().length }} games</p>
-    } @else {
-      <p class="text-(--text-secondary-color)">No games yet. Go play!</p>
-    }
+    <p class="text-(--text-secondary-color)">Recent game results</p>
   </div>
 
+  <!-- Loading Indicator -->
+  <app-loading [isLoading]="isLoading()"></app-loading>
+
+  <!-- Error Message -->
+  <app-error-message [message]="errorMessage()"></app-error-message>
+
   <!-- Game History List -->
-  @if (gameHistory().length > 0) {
-    <div class="space-y-2">
-      @for (game of gameHistory(); track game.id) {
-        <div
-          class="flex justify-between items-center bordered-container glass-bg"
-        >
-          <div class="flex-1">
-            <p class="text-(--text-secondary-color) text-sm">{{ game.playedAt | date: 'short' }}</p>
-          </div>
-          <div class="flex-1 flex gap-4 justify-center items-center">
-            <div class="text-center">
-              <p class="text-(--text-secondary-color) text-xs mb-1">You</p>
-              <p class="text-sm font-bold text-white">{{ game.playerMove }}</p>
+  @if (!isLoading()) {
+    @if (gameHistory().length > 0) {
+      <div class="space-y-2 animate-bounceUp">
+        @for (game of gameHistory(); track game.id) {
+          <div class="flex justify-between items-center bordered-container glass-bg">
+            <div class="flex-1">
+              <p class="text-(--text-secondary-color) text-sm">
+                {{ game.playedAt | date: 'short' }}
+              </p>
             </div>
-            <div class="text-center">
-              <p class="text-(--text-secondary-color) text-xs mb-1">Computer</p>
-              <p class="text-sm font-bold text-white">{{ game.computerMove }}</p>
+            <div class="flex-1 flex gap-4 justify-center items-center">
+              <div class="text-center">
+                <p class="text-(--text-secondary-color) text-xs mb-1">You</p>
+                <p class="text-sm font-bold text-white">{{ game.playerMove }}</p>
+              </div>
+              <div class="text-center">
+                <p class="text-(--text-secondary-color) text-xs mb-1">Computer</p>
+                <p class="text-sm font-bold text-white">{{ game.computerMove }}</p>
+              </div>
+            </div>
+            <div class="flex-1 text-end">
+              <p class="font-black text-lg" [style]="game.result | resultColor">
+                {{ game.result }}
+              </p>
             </div>
           </div>
-          <div class="flex-1 text-end">
-            <p [class]="'font-black text-lg ' + getResultColor(game.result)">
-              {{ game.result }}
-            </p>
-          </div>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    } @else if (gameHistory().length === 0 && !errorMessage()) {
+      <p class="text-(--text-secondary-color)">No games yet. Go play!</p>
+    }
   }
 </div>

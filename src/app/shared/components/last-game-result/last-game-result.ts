@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { GameResponse, Result } from '../../models/game.model';
 import { CommonModule } from '@angular/common';
 import { MoveDisplayComponent } from '../move-display/move-display.component';
+import { ResultColorPipe } from "../../pipes/result-color.pipe";
 
 @Component({
   selector: 'app-last-game-result',
-  imports: [CommonModule, MoveDisplayComponent],
+  imports: [CommonModule, MoveDisplayComponent, ResultColorPipe],
   templateUrl: './last-game-result.html',
   styleUrl: './last-game-result.css',
 })
@@ -25,12 +26,5 @@ export class LastGameResult {
       default:
         return '';
     }
-  }
-
-  // Get result color
-  getResultColor(result: Result | undefined): string {
-    if (result === 'WIN') return 'text-emerald-600';
-    if (result === 'LOSS') return 'text-rose-600';
-    return 'text-gray-600';
   }
 }

@@ -1,4 +1,4 @@
-<div class="h-full w-full overflow-hidden mt-auto flex flex-col gap-6 relative animate-fadeIn">
+<div class="h-full w-full relative overflow-hidden mt-auto flex flex-col gap-6 animate-fadeIn">
   <!-- Title -->
   <app-game-title [size]="'Big'"></app-game-title>
 
@@ -11,7 +11,7 @@
     <app-move-display [move]="'ROCK'" [isPlayer]="false" />
   </div>
 
-  <div class="flex flex-col space-y-8 w-xl max-w-[80%] mx-auto my-auto text-center animate-bounceUp">
+  <div class="w-xl max-w-[80%] mx-auto my-auto flex flex-col space-y-8 text-center animate-bounceUp">
     <!-- Play Button -->
     <app-menu-card [title]="'Play'" [routerLink]="'/game'"></app-menu-card>
 

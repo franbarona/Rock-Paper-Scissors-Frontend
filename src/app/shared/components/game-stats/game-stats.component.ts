@@ -1,10 +1,12 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { StatisticsService } from '../../../core/services/statistics.service';
 import { StatisticsResponse } from '../../models/statistics.model';
+import { LoadingComponent } from "../loading/loading.component";
+import { ErrorMessageComponent } from "../error-message/error-message.component";
 
 @Component({
   selector: 'app-game-stats',
-  imports: [],
+  imports: [LoadingComponent, ErrorMessageComponent],
   templateUrl: './game-stats.component.html',
   styleUrl: './game-stats.component.css',
 })

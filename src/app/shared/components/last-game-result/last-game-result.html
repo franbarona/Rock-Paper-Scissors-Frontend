@@ -3,22 +3,20 @@
   @if (lastGameResult) {
     <h3
       class="text-4xl font-black text-center mb-8"
-      [class.text-emerald-600]="lastGameResult.result === 'WIN'"
-      [class.text-rose-600]="lastGameResult.result === 'LOSS'"
-      [class.text-gray-600]="lastGameResult.result === 'DRAW'"
+      [style]="lastGameResult.result | resultColor"
     >
       {{ getResultMessage(lastGameResult!.result) }}
     </h3>
     <div class="flex gap-[8vw] justify-center items-baseline mb-4 text-center">
       <span
-        class="font-black mt-2 text-2xl lg:text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+        class="font-black mt-2 text-2xl lg:text-4xl"
         [class.opacity-50]="lastGameResult.result === 'LOSS'"
       >
         {{ lastGameResult.playerMove }}
       </span>
       <span class="font-medium">VS</span>
       <span
-        class="font-black mt-2 text-2xl lg:text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+        class="font-black mt-2 text-2xl lg:text-4xl"
         [class.opacity-50]="lastGameResult.result === 'WIN'"
       >
         {{ lastGameResult.computerMove }}

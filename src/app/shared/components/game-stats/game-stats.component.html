@@ -5,9 +5,15 @@
     <p class="text-(--text-secondary-color)">Your game performance overview</p>
   </div>
 
+  <!-- Loading Indicator -->
+  <app-loading [isLoading]="isLoading()"></app-loading>
+
+  <!-- Error Message -->
+  <app-error-message [message]="errorMessage()"></app-error-message>
+
   <!-- Statistics Cards -->
   @if (statistics() && !isLoading()) {
-    <div class="space-y-2">
+    <div class="space-y-2 animate-bounceUp">
       <!-- User Info & win rate -->
       <div class="flex justify-between items-end bordered-container glass-bg">
         <div>

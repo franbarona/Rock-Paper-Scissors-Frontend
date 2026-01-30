@@ -2,10 +2,13 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { GameService } from '../../../core/services/game.service';
 import { GameHistoryItemResponse } from '../../models/history.model';
 import { CommonModule } from '@angular/common';
+import { LoadingComponent } from "../loading/loading.component";
+import { ErrorMessageComponent } from "../error-message/error-message.component";
+import { ResultColorPipe } from "../../pipes/result-color.pipe";
 
 @Component({
   selector: 'app-game-history',
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, ResultColorPipe],
   templateUrl: './game-history.component.html',
   styleUrl: './game-history.component.css',
 })
@@ -40,12 +43,5 @@ export class GameHistoryComponent implements OnInit {
         this.isLoading.set(false);
       },
     });
-  }
-
-  // Get color for result
-  getResultColor(result: string): string {
-    if (result === 'WIN') return 'text-(--text-green-color)';
-    if (result === 'LOSS') return 'text-(--text-red-color)';
-    return 'text-(--text-secondary-color)';
   }
 }
