@@ -1,0 +1,61 @@
+<div>
+  <!-- Header Statistics -->
+  <div class="title-header">
+    <h1>Statistics</h1>
+    <p class="text-(--text-secondary-color)">Your game performance overview</p>
+  </div>
+
+  <!-- Statistics Cards -->
+  @if (statistics() && !isLoading()) {
+    <div class="space-y-2">
+      <!-- User Info & win rate -->
+      <div class="flex justify-between items-end bordered-container glass-bg">
+        <div>
+          <h2 class="font-black capitalize">{{ statistics()!.username }}</h2>
+        </div>
+        <!-- Win Rate -->
+        <div class="text-end space-y-2">
+          <p class="text-(--text-secondary-color) font-bold text-sm">Win Rate</p>
+          <p class="text-2xl lg:text-4xl font-black text-(--text-green-color)">
+            {{ getWinRate() }}%
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Stats Grid -->
+      <div class="grid grid-cols-2 gap-2">
+        <!-- Total Matches -->
+        <div class="bordered-container glass-bg text-center space-y-2">
+          <p class="text-(--text-secondary-color) font-bold text-xs">Total Matches</p>
+          <p class="text-2xl lg:text-4xl font-black text-white">
+            {{ statistics()!.totalMatches }}
+          </p>
+        </div>
+
+        <!-- Wins -->
+        <div class="bordered-container glass-bg text-center space-y-2">
+          <p class="text-(--text-secondary-color) font-bold text-sm">Wins</p>
+          <p class="text-2xl lg:text-4xl font-black text-(--text-green-color)">
+            {{ statistics()!.totalWins }}
+          </p>
+        </div>
+
+        <!-- Losses -->
+        <div class="bordered-container glass-bg text-center space-y-2">
+          <p class="text-(--text-secondary-color) font-bold text-sm">Losses</p>
+          <p class="text-2xl lg:text-4xl font-black text-(--text-red-color)">
+            {{ statistics()!.totalLosses }}
+          </p>
+        </div>
+
+        <!-- Draws -->
+        <div class="bordered-container glass-bg text-center space-y-2">
+          <p class="text-(--text-secondary-color) font-bold text-sm">Draws</p>
+          <p class="text-2xl lg:text-4xl font-black text-(--text-secondary-color)">
+            {{ statistics()!.totalDraws }}
+          </p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

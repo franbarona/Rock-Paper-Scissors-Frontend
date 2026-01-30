@@ -5,6 +5,7 @@ import { authGuard } from './core/guards/auth-guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { GameComponent } from './pages/game/game.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
 
 export const routes: Routes = [
   // Login route (no layout, no guard)
@@ -32,6 +33,11 @@ export const routes: Routes = [
       {
         path: 'game',
         component: GameComponent,
+      },
+      // Game statistics route
+      {
+        path: 'statistics',
+        component: StatisticsComponent,
       },
     ],
   },
