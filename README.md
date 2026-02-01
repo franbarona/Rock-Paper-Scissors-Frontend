@@ -1,59 +1,71 @@
-# RpsFrontend
+# Rock Paper Scissors - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+Angular 21 frontend for the Rock Paper Scissors web application.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- User authentication with secure JWT token handling
+- Responsive game interface
+- Real-time statistics and game history
+- Modern UI with Tailwind CSS
+- Signal-based state management
+- Comprehensive test coverage
+- Standalone components with dependency injection
+
+## Tech Stack
+
+- Angular 21
+- TypeScript
+- Tailwind CSS
+- RxJS
+- Jasmine & Karma & TestBed (Testing)
+
+## Prerequisites
+
+- Node.js 18+ and npm
+- Angular CLI 21+
+- Git
+
+## Installation
 
 ```bash
+# Clone the repository
+git clone 
+
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Install Angular CLI globally (if not already installed)
+npm install -g @angular/cli@21
+```
+
+## Running the Application
+
+```bash
+# Start the development server
 ng serve
+
+# Navigate to http://localhost:4200/
+
+# The app will automatically reload if you change any of the source files
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Running Tests
 
 ```bash
-ng generate component component-name
-```
+# Run all tests
+ng test
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+# Run tests without watch mode
+ng test --watch=false
 
-```bash
-ng generate --help
-```
+# Run tests with code coverage
+ng test --code-coverage
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
+# Run specific test file using fdescribe (add fdescribe in your .spec.ts)
+# Edit your file and use fdescribe() to run only that block
 ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
