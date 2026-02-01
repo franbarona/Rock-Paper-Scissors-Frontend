@@ -26,7 +26,10 @@ Angular 21 frontend for the Rock Paper Scissors web application.
 - Angular CLI 21+
 - Git
 
-## Installation
+
+## Getting Started
+
+### Installation
 
 ```bash
 # Clone the repository
@@ -42,7 +45,7 @@ npm install
 npm install -g @angular/cli@21
 ```
 
-## Running the Application
+### Running the Application
 
 ```bash
 # Start the development server
@@ -53,19 +56,9 @@ ng serve
 # The app will automatically reload if you change any of the source files
 ```
 
-## Running Tests
+### Running Tests
 
 ```bash
 # Run all tests
-ng test
-
-# Run tests without watch mode
-ng test --watch=false
-
-# Run tests with code coverage
-ng test --code-coverage
-
-# Run specific test file using fdescribe (add fdescribe in your .spec.ts)
-# Edit your file and use fdescribe() to run only that block
 ng test
 ```
