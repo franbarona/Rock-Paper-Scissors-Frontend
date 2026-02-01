@@ -15,9 +15,13 @@ export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/auth`;
   private readonly tokenKey = 'auth_token';
 
+  // Signals
+  private readonly tokenSignal = signal<string | null>(this.getStoredToken());
   private readonly currentUserSignal = signal<User | null>(this.getUserFromStorage());
+  
+  // Public read-only access
   public readonly currentUser = this.currentUserSignal.asReadonly();
-  public readonly isAuthenticated = computed(() => !!this.getToken());
+  public readonly isAuthenticated = computed(() => !!this.tokenSignal());
 
   // Login request
   login(request: LoginRequest) {
@@ -38,29 +42,36 @@ export class AuthService {
   // Save token and user after successful login/register
   saveUserData(response: AuthResponse): void {
     localStorage.setItem(this.tokenKey, response.token);
+    this.tokenSignal.set(response.token);
+    
     const user: User = {
       id: response.id,
       username: response.username,
       email: response.email,
     };
-
     this.currentUserSignal.set(user);
   }
 
   // Get JWT token from storage
   getToken(): string | null {
+    return this.tokenSignal();
+  }
+
+  // Retrieve stored token from localStorage
+  private getStoredToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
   // Clear authentication data and logout user
   logout(): void {
     localStorage.removeItem(this.tokenKey);
+    this.tokenSignal.set(null);
     this.currentUserSignal.set(null);
   }
 
   // Retrieve user from storage (for persistence on page reload)
   private getUserFromStorage(): User | null {
-    const token = this.getToken();
+    const token = this.getStoredToken();
     if (token) {
       return this.decodeUserFromToken(token);
     }

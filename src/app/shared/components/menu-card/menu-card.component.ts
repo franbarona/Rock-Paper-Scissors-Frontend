@@ -10,9 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './menu-card.component.css'
 })
 export class MenuCardComponent {
-  @Input() icon: string = '';
   @Input() title: string = '';
-  @Input() description: string = '';
   @Input() routerLink: string = '';
   @Input() disabled: boolean = false;
 }

@@ -212,3 +212,21 @@ button:disabled {
         animation: fadeInTo50 1s ease-in forwards;
     }
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--text-secondary-color); /* Fondo del track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color); /* Color del thumb (la parte movible) */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color); /* Color al hover */
+}
