@@ -1,0 +1,69 @@
+<div class="page-container mx-auto">
+  <!-- Header Profile -->
+  <div class="title-header">
+    <h1>Profile</h1>
+    <p class="text-(--text-secondary-color)">Manage your account information</p>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="text-center py-8">
+      <p class="text-gray-400">Loading your profile...</p>
+    </div>
+  }
+
+  <!-- Profile Form -->
+  @if (!isLoading() && currentUser()) {
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6 max-w-md mx-auto mb-8">
+      <!-- Username Field -->
+      <div>
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your username"
+          [attr.data-invalid]="username?.invalid && username?.touched"
+        />
+        @if (username?.invalid && username?.touched) {
+          <p class="text-error">Username must be between 3 and 12 characters</p>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
+          [attr.data-invalid]="email?.invalid && email?.touched"
+        />
+        @if (email?.invalid && email?.touched) {
+          <p class="text-error">Email is not valid</p>
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="!isFormValid() || !hasChanges() || isSaving()"
+        class="w-full mt-6"
+      >
+        @if (!isSaving()) {
+          <span>Save Changes</span>
+        }
+        @if (isSaving()) {
+          <span>Saving...</span>
+        }
+      </button>
+    </form>
+  }
+
+  <!-- Error Message -->
+  <app-error-message [message]="errorMessage()"></app-error-message>
+
+  <!-- Success Message -->
+  <app-success-message [message]="successMessage()"></app-success-message>
+</div>

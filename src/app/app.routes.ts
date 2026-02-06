@@ -7,6 +7,7 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { GameComponent } from './pages/game/game.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { InstructionsComponent } from './pages/instructions/instructions.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   // Login route (no layout, no guard)
@@ -29,6 +30,11 @@ export const routes: Routes = [
       {
         path: '',
         component: MenuComponent,
+      },
+      // Profile route
+      {
+        path: 'profile',
+        component: ProfileComponent,
       },
       // Game route
       {

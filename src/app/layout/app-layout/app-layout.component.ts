@@ -24,6 +24,11 @@ export class AppLayoutComponent {
   showBackButton = computed(() => this.routerUrl() !== '/');
   showLogoutButton = computed(() => this.routerUrl() === '/');
 
+  // Navigate to profile page
+  goToProfile(): void {
+    this.router.navigate(['/profile']);
+  }
+
   // Logout and redirect to login
   logout(): void {
     this.authService.logout();
