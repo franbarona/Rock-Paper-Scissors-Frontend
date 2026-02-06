@@ -21,7 +21,7 @@
           [attr.data-invalid]="username?.invalid && username?.touched"
         />
         @if (username?.invalid && username?.touched) {
-          <p class="text-error">Username is required (min 3 characters)</p>
+          <p class="text-error">Username must be between 3 and 12 characters</p>
         }
       </div>
 

@@ -1,15 +1,28 @@
 import { Component, inject, signal } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { RegisterRequest } from '../../shared/models/auth.model';
-import { GameTitleComponent } from "../../shared/components/game-title/game-title.component";
-import { ErrorMessageComponent } from "../../shared/components/error-message/error-message.component";
+import { GameTitleComponent } from '../../shared/components/game-title/game-title.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, GameTitleComponent, ErrorMessageComponent],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
+    GameTitleComponent,
+    ErrorMessageComponent,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -71,8 +84,17 @@ export class RegisterComponent {
     this.authService.register(registerRequest).subscribe({
       next: (response) => {
         if (response.success && response.data) {
-          this.authService.saveUserData(response.data);
-          this.router.navigate(['/']);
+          this.authService.saveToken(response.data.token);
+          this.authService.refreshCurrentUser().subscribe({
+            next: (userResponse) => {
+              if (userResponse.success && userResponse.data) {
+                this.router.navigate(['/']);
+              }
+            },
+            error: () => {
+              this.errorMessage.set('Failed to load user data');
+            },
+          });
         } else {
           this.errorMessage.set(response.message || 'Registration failed. Please try again.');
         }

@@ -4,13 +4,19 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { LoginRequest } from '../../shared/models/auth.model';
-import { GameTitleComponent } from "../../shared/components/game-title/game-title.component";
+import { GameTitleComponent } from '../../shared/components/game-title/game-title.component';
 import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, GameTitleComponent, ErrorMessageComponent],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
+    GameTitleComponent,
+    ErrorMessageComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -56,8 +62,17 @@ export class LoginComponent {
     this.authService.login(loginRequest).subscribe({
       next: (response) => {
         if (response.success && response.data) {
-          this.authService.saveUserData(response.data);
-          this.router.navigate(['/']);
+          this.authService.saveToken(response.data.token);
+          this.authService.refreshCurrentUser().subscribe({
+            next: (userResponse) => {
+              if (userResponse.success && userResponse.data) {
+                this.router.navigate(['/']);
+              }
+            },
+            error: () => {
+              this.errorMessage.set('Failed to load user data');
+            },
+          });
         } else {
           this.errorMessage.set(response.message || 'Login failed. Please try again.');
         }

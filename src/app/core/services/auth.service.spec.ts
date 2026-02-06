@@ -59,7 +59,12 @@ describe('AuthService', () => {
         email: 'old@example.com',
         token: 'old-token',
       };
-      service.saveUserData(authResponse);
+      service.saveToken(authResponse.token);
+      service.setCurrentUser({
+        id: 99,
+        username: 'olduser',
+        email: 'old@example.com',
+      });
       expect(service.currentUser()?.id).toBe(99);
 
       // Act: Login attempt (HTTP request is made)
@@ -68,7 +73,7 @@ describe('AuthService', () => {
 
       // Assert: Old user data should be cleared before new login
       expect(service.currentUser()).toBeNull();
-      expect(service.getToken()).toBeNull();
+      expect(service.token()).toBeNull();
 
       httpMock.expectOne(`${environment.apiUrl}/auth/login`).flush({});
     });
@@ -112,7 +117,12 @@ describe('AuthService', () => {
         token: 'jwt-token-123',
       };
 
-      service.saveUserData(authResponse);
+      service.saveToken(authResponse.token);
+      service.setCurrentUser({
+        id: 1,
+        username: 'testuser',
+        email: 'test@example.com',
+      });
 
       expect(localStorage.getItem('auth_token')).toBe('jwt-token-123');
       expect(service.currentUser()).toEqual({
@@ -125,7 +135,7 @@ describe('AuthService', () => {
 
   describe('getToken', () => {
         it('should return null when no token exists', () => {
-      const token = service.getToken();
+      const token = service.token();
       expect(token).toBeNull();
     });
 
@@ -137,10 +147,15 @@ describe('AuthService', () => {
         token: 'test-token-123',
       };
 
-      service.saveUserData(response);
+      service.saveToken(response.token);
+      service.setCurrentUser({
+        id: 1,
+        username: 'testuser',
+        email: 'test@example.com',
+      });
       service.logout();
 
-      const token = service.getToken();
+      const token = service.token();
       expect(token).toBeNull();
     });
 
@@ -152,8 +167,13 @@ describe('AuthService', () => {
         token: 'test-token-123',
       };
 
-      service.saveUserData(response);
-      const token = service.getToken();
+      service.saveToken(response.token);
+      service.setCurrentUser({
+        id: 1,
+        username: 'testuser',
+        email: 'test@example.com',
+      });
+      const token = service.token();
 
       expect(token).toBe('test-token-123');
     });
@@ -175,48 +195,17 @@ describe('AuthService', () => {
         email: 'test@example.com',
         token: 'jwt-token-123',
       };
-      service.saveUserData(authResponse);
+      service.saveToken(authResponse.token);
+      service.setCurrentUser({
+        id: 1,
+        username: 'testuser',
+        email: 'test@example.com',
+      });
       expect(service.currentUser()).not.toBeNull();
 
       service.logout();
 
       expect(service.currentUser()).toBeNull();
-    });
-  });
-
-  describe('decodeUserFromToken (indirectly via getUserFromStorage)', () => {
-    it('should decode valid JWT token and return user', () => {
-      // Create a valid JWT with correct payload
-      const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-      const payload = btoa(
-        JSON.stringify({
-          sub: 1,
-          username: 'testuser',
-          email: 'test@example.com',
-          exp: Math.floor(Date.now() / 1000) + 3600, // Expires in 1 hour
-        }),
-      );
-      const signature = 'fake-signature';
-      const validToken = `${header}.${payload}.${signature}`;
-
-      localStorage.setItem('auth_token', validToken);
-
-      resetTestBed();
-      const authService = TestBed.inject(AuthService);
-
-      expect(authService.currentUser()).toEqual({
-        id: 1,
-        username: 'testuser',
-        email: 'test@example.com',
-      });
-    });
-
-    it('should return null when no token exists', () => {
-      // Reset TestBed to force re-initialization of service with token in storage
-      resetTestBed();
-      const authService = TestBed.inject(AuthService);
-
-      expect(authService.currentUser()).toBeNull();
     });
   });
 });
