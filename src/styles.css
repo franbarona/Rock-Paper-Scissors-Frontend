@@ -10,6 +10,7 @@
     --border-color: oklch(39.2% 0.042 251.392);
     --primary-color: oklch(59.2% 0.249 0.584);
     --secondary-color: oklch(37.3% 0.034 259.733);
+    --success-color: oklch(44.8% 0.119 151.328);
     --error-color: oklch(70.4% 0.191 22.216);
     --border-radius: 12px;
 }
