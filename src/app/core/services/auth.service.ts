@@ -23,7 +23,7 @@ export class AuthService {
   // Public read-only access
   public readonly token = this.tokenSignal.asReadonly();
   public readonly currentUser = this.currentUserSignal.asReadonly();
-  public readonly isAuthenticated = computed(() => !!this.tokenSignal());
+  public readonly isAuthenticated = computed(() => !!this.tokenSignal() && this.isTokenValid());
 
   constructor() {
     // when token changes, load current user or clear it
@@ -97,5 +97,28 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     this.tokenSignal.set(null);
     this.currentUserSignal.set(null);
+  }
+
+  // Check if the stored token is valid (not expired)
+  private isTokenExpired(): boolean {
+    const token = localStorage.getItem(this.tokenKey);
+
+    if (!token) {
+      return true;
+    }
+
+    try {
+      const payload = token.split('.')[1];
+      const decoded = JSON.parse(atob(payload));
+      const currentTime = Date.now() / 1000;
+
+      return decoded.exp < currentTime;
+    } catch (error) {
+      return true;
+    }
+  }
+
+  isTokenValid(): boolean {
+    return !this.isTokenExpired();
   }
 }
